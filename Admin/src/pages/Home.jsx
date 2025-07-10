@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, List, ClipboardList } from 'lucide-react';
 
 const Home = () => {
   return (
