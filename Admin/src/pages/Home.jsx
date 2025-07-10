@@ -12,26 +12,27 @@ const Home = () => {
         <p>Here’s a quick overview. Use the buttons below to manage products efficiently.</p>
       </div>
 
-      {/* Action Buttons */}
-      <div className="grid gap-6 sm:grid-cols-2 mb-12 w-full max-w-3xl">
+      {/* Action Buttons in one row */}
+      <div className="flex flex-wrap justify-center gap-6 w-full max-w-4xl">
         <Link
           to="/add"
-          className="flex flex-col items-center justify-center p-6 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl shadow-md transition-transform transform hover:scale-105"
+          className="flex items-center justify-center px-8 py-6 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl shadow-md transition-transform transform hover:scale-105 text-xl font-bold"
         >
-          <span className="text-xl font-bold">Add Product</span>
+          Add Product
         </Link>
 
         <Link
           to="/list"
-          className="flex flex-col items-center justify-center p-6 bg-green-600 hover:bg-green-700 text-white rounded-2xl shadow-md transition-transform transform hover:scale-105"
+          className="flex items-center justify-center px-8 py-6 bg-green-600 hover:bg-green-700 text-white rounded-2xl shadow-md transition-transform transform hover:scale-105 text-xl font-bold"
         >
-          <span className="text-xl font-bold">Product List</span>
+          Product List
         </Link>
-         <Link
-          to="/list"
-          className="flex flex-col items-center justify-center p-6 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl shadow-md transition-transform transform hover:scale-105"
+
+        <Link
+          to="/orders"
+          className="flex items-center justify-center px-8 py-6 bg-yellow-500 hover:bg-yellow-600 text-white rounded-2xl shadow-md transition-transform transform hover:scale-105 text-xl font-bold"
         >
-          <span className="text-xl font-bold">My Orders</span>
+          My Orders
         </Link>
       </div>
     </div>
