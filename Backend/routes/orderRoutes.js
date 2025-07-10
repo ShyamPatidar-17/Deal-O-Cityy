@@ -12,6 +12,7 @@ orderRouter.post('/list',adminAuth,allOrders)
 orderRouter.post('/status', authUser, updateStatusUser);
 orderRouter.post('/statusAdmin',adminAuth,updateStatusAdmin)
 
+
 //Payment
 orderRouter.post('/place',authUser,placeOrderCOD)
 orderRouter.post('/stripe',authUser,placeOrderStripe)
@@ -19,6 +20,7 @@ orderRouter.post('/stripe',authUser,placeOrderStripe)
 
 //User Panel
 orderRouter.post('/userorders',authUser,userOrders)
+
 
 //verifying the online payment
 orderRouter.post('/verifyStripe',authUser,verifyStripe)

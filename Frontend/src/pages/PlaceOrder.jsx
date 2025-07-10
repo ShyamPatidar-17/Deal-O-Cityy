@@ -36,77 +36,82 @@ const Placeorder = () => {
     setFormData((data) => ({ ...data, [name]: value }));
   };
 
-const onSubmitHandler = async (e) => {
-  e.preventDefault();
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
 
-  if (!backendUrl) {
-    toast.error('Backend URL is not configured!');
-    return;
-  }
+    console.log("SUbmittedddd");
 
-  try {
-    let orderItems = [];
-
-    for (const itemId in cartItems) {
-      for (const size in cartItems[itemId]) {
-        if (cartItems[itemId][size] > 0) {
-          const product = products.find((p) => p._id === itemId);
-          if (product) {
-            const itemInfo = { ...product };
-            itemInfo.size = size;
-            itemInfo.quantity = cartItems[itemId][size];
-            orderItems.push(itemInfo);
-          }
-        }
-      }
-    }
-
-    if (orderItems.length === 0) {
-      toast.error("Your cart is empty. Add items before placing an order.");
+    if (!backendUrl) {
+      toast.error('Backend URL is not configured!');
       return;
     }
 
-    const orderData = {
-      address: formData,
-      items: orderItems,
-      amount: getCartAmount() + delivery_fee,
-      paymentMethod: method
-    };
+    try {
+      let orderItems = [];
 
-    switch (method) {
-      case 'cod':
-        const response = await axios.post(backendUrl+"/api/order/place", orderData, {
-          headers: { token }
-        });
-
-        if (response.data.success) {
-          setCartItems({});
-          toast.success("Order placed successfully!");
-          navigate('/orders');
-        } else {
-          toast.error(response.data.message || "Failed to place order.");
+      for (const itemId in cartItems) {
+        for (const size in cartItems[itemId]) {
+          if (cartItems[itemId][size] > 0) {
+            const product = products.find((p) => p._id === itemId);
+            if (product) {
+              const itemInfo = { ...product };
+              itemInfo.size = size;
+              itemInfo.quantity = cartItems[itemId][size];
+              orderItems.push(itemInfo);
+            }
+          }
         }
-        break;
-case 'stripe':
-  const responseStripe = await axios.post(backendUrl + "/api/order/stripe", orderData, {
-    headers: { token }
-  });
+      }
 
-  if (responseStripe.data.success) {
-    const { session_url } = responseStripe.data;
-    window.location.replace(session_url);
-  } else {
-    toast.error(responseStripe.data.message || "Stripe failed");
-  }
-  break;
-      default:
-        toast.error("Invalid payment method selected.");
+      if (orderItems.length === 0) {
+        toast.error("Your cart is empty. Add items before placing an order.");
+        return;
+      }
+
+      const orderData = {
+        address: formData,
+        items: orderItems,
+        amount: getCartAmount() + delivery_fee,
+        paymentMethod: method
+      };
+
+      switch (method) {
+        case 'cod':
+          const response = await axios.post(backendUrl + "/api/order/place", orderData, {
+            headers: { token }
+          });
+
+          console.log(response.data);
+
+          if (response.data.success) {
+            setCartItems({});
+            toast.success("Order placed successfully!");
+            navigate('/orders');
+            console.log("Success code")
+          } else {
+            toast.error(response.data.message || "Failed to place order.");
+          }
+          break;
+        case 'stripe':
+          const responseStripe = await axios.post(backendUrl + "/api/order/stripe", orderData, {
+            headers: { token }
+          });
+
+          if (responseStripe.data.success) {
+            const { session_url } = responseStripe.data;
+            window.location.replace(session_url);
+          } else {
+            toast.error(responseStripe.data.message || "Stripe failed");
+          }
+          break;
+        default:
+          toast.error("Invalid payment method selected.");
+      }
+    } catch (error) {
+      console.error("Order placement error:", error);
+      toast.error("Something went wrong while placing your order.");
     }
-  } catch (error) {
-    console.error("Order placement error:", error);
-    toast.error("Something went wrong while placing your order.");
-  }
-};
+  };
 
 
   return (
@@ -147,7 +152,7 @@ case 'stripe':
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`} />
               <img src={assets.stripe_logo} alt="Stripe" className='h-5 mx-4' />
             </div>
-           
+
             <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`} />
               <p className='text-gr500 text-sm font-medium mx-4'>CASH ON DELIVERY</p>

@@ -39,7 +39,7 @@ const Navbar = () => {
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
         </NavLink>
         <a
-    href="http://localhost:5174/"
+    href="https://admin-deal-o-city-17.vercel.app"
     target="_blank"
     rel="noopener noreferrer"
     className='flex flex-col items-center gap-1 text-sm text-gray-700'

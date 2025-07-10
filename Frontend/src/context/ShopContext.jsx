@@ -17,6 +17,8 @@ export default function ShopContextProvider(props) {
   const [token, setToken] = useState('');
   const navigate = useNavigate();
 
+  console.log(backendUrl)
+
 
   const addToCart = async (itemId, size) => {
     if (!size) {
