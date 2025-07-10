@@ -27,6 +27,12 @@ const Home = () => {
         >
           <span className="text-xl font-bold">Product List</span>
         </Link>
+         <Link
+          to="/list"
+          className="flex flex-col items-center justify-center p-6 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl shadow-md transition-transform transform hover:scale-105"
+        >
+          <span className="text-xl font-bold">My Orders</span>
+        </Link>
       </div>
     </div>
   );
