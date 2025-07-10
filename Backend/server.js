@@ -15,7 +15,7 @@ const port = process.env.PORT || 4000;
 connectDB();
 connectCloudinary();
 
-const allowedOrigins = ['http://localhost:5174','http://localhost:5173'];
+const allowedOrigins = ['https://deal-o-cityy-official.vercel.app','https://deal-o-cityy-admin-official.vercel.app'];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
