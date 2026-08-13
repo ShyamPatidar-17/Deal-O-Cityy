@@ -113,9 +113,10 @@ const verifyStripe = async (req, res) => {
 //Admin Panel
 const allOrders = async (req, res) => {
 
-
   try {
     const orders = await orderModel.find({})
+    
+    console.log(orders)
     res.json({ success: true, orders })
   } catch (error) {
     console.log(error)
@@ -128,6 +129,8 @@ const userOrders = async (req, res) => {
   try {
     const { userId } = req.body
 
+    const order = await orderModel.find({})
+    console.log(order)
     const orders = await orderModel.find({ userId })
     res.json({ success: true, orders })
   } catch (error) {
