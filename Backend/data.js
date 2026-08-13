@@ -2,7 +2,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 
 // 1. Replace with your actual MongoDB Atlas connection string
 const MONGODB_URI =
-"mongodb+srv://shyampatidar672_db_user:aHNIKs5Xhz7qjY2Q@deal-o-city.itoaq7j.mongodb.net/?appName=Deal-o-City";
+process.env.MONGODB_URI;
 const DATABASE_NAME = "Deal-o-City";
 const COLLECTION_NAME = "products";
 
